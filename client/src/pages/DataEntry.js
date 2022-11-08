@@ -8,14 +8,27 @@ const DataEntry = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        const request = new Request('/predict');
+        const rawFormData = new FormData(e.target)
+        const formData = Object.fromEntries(rawFormData.entries());
+
+        console.log(formData);
+
+        for(let i in formData){
+            if(isNaN(parseInt(formData[i]))){
+                alert('ERROR: Invalid Input');
+                return;
+            }
+        }
+
+        const request = new Request('/predict?' + new URLSearchParams(
+            formData
+        ));
 
         fetch(request)
             .then((res) => res.json())
             .then((json) => {
-                
                 console.log(json);
-                let data = []
+                let data = [];
 
                 for (let i in Object.keys(json)) {
                     let key = Object.keys(json)[i];
@@ -24,6 +37,7 @@ const DataEntry = () => {
                         "value": json[key]
                     })
                 }
+
                 navigate('/predictions', { state: { data: data } });
             
             });
