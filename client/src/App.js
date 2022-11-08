@@ -1,23 +1,17 @@
-import logo from './logo.svg';
 import './App.css';
+import {Route, Routes, useNavigate} from 'react-router-dom';
+import DataEntry from './pages/DataEntry';
+import Predictions from './pages/Predictions';
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>Star System Data Predictor</h1>
+      <p>Predict data about star systems based on basic information about the star!</p>
+      <Routes>
+        <Route path="/" element={<DataEntry/>}/>
+        <Route path="/" element={<Predictions/>}/>
+      </Routes>
     </div>
   );
 }
