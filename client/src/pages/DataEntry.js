@@ -7,7 +7,11 @@ const DataEntry = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        navigate('/predictions')
+        navigate('/predictions', {state: {data: [
+            {property: 'name', value: 'Centurion-B'},
+            {property: 'width', value: '100 gigameters'},
+            {property: 'number of planets', value: 25},
+        ]}});
     }
 
     return <div className="data-entry">
