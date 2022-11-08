@@ -1,5 +1,5 @@
 import './DataEntry.css';
-import {useNavigate} from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const DataEntry = () => {
 
@@ -8,26 +8,25 @@ const DataEntry = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        const http = new XMLHttpRequest();
-        http.open("GET", '/predict');
-        http.send();
+        const request = new Request('/predict');
 
-        http.onreadystatechange = (e) => {
-            let responseJSON = JSON.parse(http.responseText);
-            console.log(responseJSON);
+        fetch(request)
+            .then((res) => res.json())
+            .then((json) => {
+                
+                console.log(json);
+                let data = []
 
-            let data = []
-
-            for (let i in Object.keys(responseJSON)){
-                let key = Object.keys(responseJSON)[i];
-                data.push({
-                    "property": key,
-                    "value": responseJSON[key]
-                })
-            }
-
-            navigate('/predictions', {state: {data: data}});
-        }
+                for (let i in Object.keys(json)) {
+                    let key = Object.keys(json)[i];
+                    data.push({
+                        "property": key,
+                        "value": json[key]
+                    })
+                }
+                navigate('/predictions', { state: { data: data } });
+            
+            });
     }
 
     return <div className="data-entry">

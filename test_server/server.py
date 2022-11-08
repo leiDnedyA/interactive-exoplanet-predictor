@@ -10,7 +10,7 @@ _serverPort = 3001
 class _Server(BaseHTTPRequestHandler):
     def do_GET(self):
         if self.path == '/predict':
-            print('predict')
+            print(self.headers)
         self.send_response(200)
         self.send_header("Content-type", "application/json")
         self.end_headers()
