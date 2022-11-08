@@ -10,7 +10,7 @@ function App() {
       <p>Predict data about star systems based on basic information about the star!</p>
       <Routes>
         <Route path="/" element={<DataEntry/>}/>
-        <Route path="/" element={<Predictions/>}/>
+        <Route path="/predictions" element={<Predictions/>}/>
       </Routes>
     </div>
   );

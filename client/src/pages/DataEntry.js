@@ -1,10 +1,13 @@
-import './DataEntry.css'
+import './DataEntry.css';
+import {useNavigate} from 'react-router-dom';
 
 const DataEntry = () => {
 
+    const navigate = useNavigate();
+
     const handleSubmit = (e) => {
         e.preventDefault();
-        // TODO: do stuff with data
+        navigate('/predictions')
     }
 
     return <div className="data-entry">
