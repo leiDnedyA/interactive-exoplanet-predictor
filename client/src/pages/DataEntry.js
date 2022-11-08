@@ -11,8 +11,6 @@ const DataEntry = () => {
         const rawFormData = new FormData(e.target)
         const formData = Object.fromEntries(rawFormData.entries());
 
-        console.log(formData);
-
         for(let i in formData){
             if(isNaN(parseInt(formData[i]))){
                 alert('ERROR: Invalid Input');
