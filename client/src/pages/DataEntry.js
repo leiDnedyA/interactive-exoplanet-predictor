@@ -7,11 +7,27 @@ const DataEntry = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        navigate('/predictions', {state: {data: [
-            {property: 'name', value: 'Centurion-B'},
-            {property: 'width', value: '100 gigameters'},
-            {property: 'number of planets', value: 25},
-        ]}});
+
+        const http = new XMLHttpRequest();
+        http.open("GET", '/predict');
+        http.send();
+
+        http.onreadystatechange = (e) => {
+            let responseJSON = JSON.parse(http.responseText);
+            console.log(responseJSON);
+
+            let data = []
+
+            for (let i in Object.keys(responseJSON)){
+                let key = Object.keys(responseJSON)[i];
+                data.push({
+                    "property": key,
+                    "value": responseJSON[key]
+                })
+            }
+
+            navigate('/predictions', {state: {data: data}});
+        }
     }
 
     return <div className="data-entry">
