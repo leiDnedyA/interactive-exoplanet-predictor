@@ -7,8 +7,10 @@ import {FaGithub} from 'react-icons/fa'
 function App() {
   return (
     <div className="App">
-      <h1>Star System Data Predictor</h1>
-      <p>Predict data about star systems based on basic information about the star!</p>
+      <div className="header">
+        <h1>Star System Generator</h1>
+        <p>Predict data about star systems based on basic information about the star!</p>
+      </div>
       <Routes>
         <Route path="/" element={<DataEntry/>}/>
         <Route path="/predictions" element={<Predictions/>}/>

@@ -41,7 +41,7 @@ const DataEntry = () => {
             });
     }
 
-    return <div className="data-entry">
+    return <div className="DataEntry flex-card">
         <h3>Star Data</h3>
         <form className="data-entry-form" onSubmit={handleSubmit}>
             <label for="mass">Mass:</label>

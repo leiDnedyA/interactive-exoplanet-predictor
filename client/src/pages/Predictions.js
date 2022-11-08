@@ -24,9 +24,11 @@ const Predictions = () => {
         dataElements.push(e);
     }
 
-    return <div className="predictions">
-        <h3>Data about star</h3>
-        {dataElements}
+    return <div className="Predictions flex-card">
+        <h3>Star System Data</h3>
+        <div className="flex-card">
+            {dataElements}
+        </div>
     </div>
 }
 

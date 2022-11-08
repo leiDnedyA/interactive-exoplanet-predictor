@@ -3,7 +3,23 @@
   flex-direction: column;
   align-items: center;
   height: 100%;
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   justify-content: space-between;
+  padding: 25px;
+  margin: 5px;
+}
+
+.header > h1 {
+  margin: 5px;
+}
+
+.header > p {
+  margin: 0px;
 }
 
 .footer {
@@ -12,7 +28,7 @@
   bottom: 5%;
 }
 
-@media (max-height: 300px){
+@media (max-height: 500px){
   .footer {
     position: relative;
 
