@@ -27,6 +27,7 @@ joblib.dump(planet_predictor,
             'Backend\Tree_algorithm\Saved_models\exoplanet_predictor.joblib')
 
 predTree = planet_predictor.predict(X_testset)
+print(type((predTree).tolist()))
 
 
 print("Precisión de los Arboles de Decisión: ",
