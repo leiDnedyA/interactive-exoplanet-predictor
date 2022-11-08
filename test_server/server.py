@@ -10,7 +10,7 @@ import time
 _hostName = "localhost"
 _serverPort = 3001
 
-_names = ['Alpha Centauri-B', 'Beetlejuce', 'The Sun', 'Cool Star Name']
+_names = ['Alpha Centauri-B', 'Betelgeuse', 'The Sun', 'Cool Star Name']
 
 
 class _Server(BaseHTTPRequestHandler):

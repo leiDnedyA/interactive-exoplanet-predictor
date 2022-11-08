@@ -2,4 +2,19 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  height: 100%;
+  justify-content: space-between;
+}
+
+.footer {
+  position: absolute;
+  background-color: white;
+  bottom: 5%;
+}
+
+@media (max-height: 300px){
+  .footer {
+    position: relative;
+
+  }
 }

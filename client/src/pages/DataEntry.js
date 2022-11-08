@@ -42,7 +42,7 @@ const DataEntry = () => {
     }
 
     return <div className="data-entry">
-        <h3>Data About Star</h3>
+        <h3>Star Data</h3>
         <form className="data-entry-form" onSubmit={handleSubmit}>
             <label for="mass">Mass:</label>
             <input id="massInput" className="input text-input" name="mass" type="text" placeholder="mass of star..." />

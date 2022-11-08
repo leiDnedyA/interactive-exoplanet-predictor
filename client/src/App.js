@@ -2,6 +2,7 @@ import './App.css';
 import {Route, Routes, useNavigate} from 'react-router-dom';
 import DataEntry from './pages/DataEntry';
 import Predictions from './pages/Predictions';
+import {FaGithub} from 'react-icons/fa'
 
 function App() {
   return (
@@ -12,6 +13,13 @@ function App() {
         <Route path="/" element={<DataEntry/>}/>
         <Route path="/predictions" element={<Predictions/>}/>
       </Routes>
+
+      {/* 
+      REMINDER:
+        Change github link once we change the link for the project
+      */}
+
+      <div className="footer"><a href="https://github.com/leiDnedyA/name-to-be-determined/">Follow us on GitHub! <FaGithub/></a></div>
     </div>
   );
 }
