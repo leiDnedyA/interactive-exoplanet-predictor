@@ -7,8 +7,6 @@ from Backend.Tree_algorithm import model_predictor
 _hostName = "localhost"
 _serverPort = 3001
 
-_names = ['Alpha Centauri-B', 'Beetlejuce', 'The Sun', 'Cool Star Name']
-
 class _Server(BaseHTTPRequestHandler):
     def do_GET(self):
         
