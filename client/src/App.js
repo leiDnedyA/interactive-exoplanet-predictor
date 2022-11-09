@@ -23,7 +23,7 @@ function App() {
         Change github link once we change the link for the project
       */}
 
-      <div className="footer"><a href="https://github.com/leiDnedyA/name-to-be-determined/">Follow us on GitHub! <FaGithub/></a></div>
+      <div className="footer"><a href="https://github.com/leiDnedyA/interactive-exoplanet-predictor/">Follow us on GitHub! <FaGithub/></a></div>
     </div>
   );
 }
