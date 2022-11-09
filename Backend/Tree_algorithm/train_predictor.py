@@ -1,11 +1,18 @@
+# Import the libraries for the algortihm
+# Sklearn
 from sklearn import metrics
 from sklearn.model_selection import train_test_split
-import pandas as pd
 from sklearn.ensemble import RandomForestClassifier
+# Pandas for database processing
+import pandas as pd
+# Joblib to dump and laod the model
 import joblib
 
+# DataFrame, we read the csv with pandas.
 df = pd.read_csv('Backend\Data\PSCompPars_2021.04.20_19.50.36.csv', sep=',')
+
 # Select and classify the variables considered due to the correlation study.
+# In t
 var_df = df[['sy_snum', 'sy_pnum', 'st_teff', 'st_rad', 'st_mass',
              'st_met', 'st_age', 'st_dens', 'st_radv', 'st_logg']]
 
