@@ -23,14 +23,6 @@
 }
 
 .footer {
-  position: absolute;
   background-color: white;
-  bottom: 5%;
-}
-
-@media (max-height: 500px){
-  .footer {
-    position: relative;
-
-  }
+  margin-bottom: 25px;
 }
