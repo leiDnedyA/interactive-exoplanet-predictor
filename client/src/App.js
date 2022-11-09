@@ -3,6 +3,7 @@ import {Route, Routes, useNavigate} from 'react-router-dom';
 import DataEntry from './pages/DataEntry';
 import Predictions from './pages/Predictions';
 import {FaGithub} from 'react-icons/fa'
+import WorldModel from './elements/WorldModel';
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
       <Routes>
         <Route path="/" element={<DataEntry/>}/>
         <Route path="/predictions" element={<Predictions/>}/>
+        <Route path="/model" element={<WorldModel/>}/>
       </Routes>
 
       {/* 
