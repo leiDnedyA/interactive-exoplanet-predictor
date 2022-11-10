@@ -25,12 +25,12 @@ x = true_df[['st_teff', 'st_rad', 'st_mass', 'st_met',
              'st_age', 'st_dens', 'st_radv', 'st_logg']]
 y = true_df[['sy_pnum']]
 
-# Call the RandomForestClassifier from sklearn.
-planet_predictor = RandomForestClassifier(n_estimators=1000, criterion='gini')
-
 # Split the data into training and testing data.
 X_trainset, X_testset, y_trainset, y_testset = train_test_split(
     x, y, test_size=0.2, random_state=3)
+
+# Call the RandomForestClassifier from sklearn.
+planet_predictor = RandomForestClassifier(n_estimators=1000, criterion='gini')
 
 # Fit the model with the training data.
 planet_predictor.fit(X_trainset, y_trainset)
