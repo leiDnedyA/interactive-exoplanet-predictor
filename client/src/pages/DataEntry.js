@@ -16,34 +16,12 @@ const DataEntry = () => {
 
         console.log(e.target)
 
+        navigate('/loading')
+
         const rawFormData = new FormData(e.target)
         const formData = Object.fromEntries(rawFormData.entries());
 
         console.log(formData)
-
-        // //Test data
-        // x = [data['temperature'], data['radius'], data['stellar_mass'], data['metallicity'], data['age'], data['density'], data['radial_velocity'], data['surface_gravity']]
-
-        // let formData = {
-        //     'temperature': 1,
-        //     'radius': 50,
-        //     'stellar_mass': 400,
-        //     'metallicity': 10,
-        //     'age': 10,
-        //     'density': 11,
-        //     'radial_velocity': 123,
-        //     'surface_gravity': 11
-        // }
-
-        // let formData = {
-
-        // }
-
-        // for(let i in Object.keys(formData0)){
-        //     let key = Object.keys(formData0)[i]
-        //     formData[parseInt(i)+1] = formData0[key];
-
-        // }
 
         //makes sure data is valid
         for (let i in formData) {
