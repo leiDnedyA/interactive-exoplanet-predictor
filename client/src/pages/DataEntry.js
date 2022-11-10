@@ -1,10 +1,14 @@
 import './DataEntry.css';
 import { useNavigate } from 'react-router-dom';
 import TextForm from '../elements/TextForm'
+import RangeForm from '../elements/RangeForm';
+import { useState } from 'react';
 
 const DataEntry = () => {
 
     const navigate = useNavigate();
+
+    const [rangeEnabled, setRangeEnabled] = useState(true);
 
     //Handles form submit
     const handleSubmit = (e) => {
@@ -72,6 +76,17 @@ const DataEntry = () => {
             });
     }
 
+    const inputFields = [
+        { label: 'Temperature (Kelvin)', name: 'temperature', min: 575, max: 29300 },
+        { label: 'Radius', name: 'radius', min: 0.04, max: 83.8 },
+        { label: 'Stellar Mass', name: 'stellar_mass', min: 2.78, max: 10.94 },
+        { label: 'Metallicity', name: 'metallicity', min: -1, max: .48 },
+        { label: 'Age', name: 'age', min: 0, max: 14.9 },
+        { label: 'Density', name: 'density', min: 0.00401, max: 114 },
+        { label: 'Radial Velocity', name: 'radial_velocity', min: -118, max: 244.99 },
+        { label: 'Surface Gravity', name: 'surface_gravity', min: 1.3, max: 5.52 },
+    ]
+
     return <div className="DataEntry flex-card">
         <h3>Star Data</h3>
         {/* <form className="data-entry-form" onSubmit={handleSubmit}>
@@ -81,7 +96,18 @@ const DataEntry = () => {
             <input id="circumference-input" className="input text-input" name="circumference" type="text" placeholder="circumference of star..." />
             <input className="input submit-button" type="submit" value="Submit" />
         </form> */}
-        <TextForm
+
+        <div>
+
+            <input type="checkbox" name="useRange" defaultChecked onChange={()=>{setRangeEnabled(v=>!v)}}/><label htmlFor='useRange'>Use Range</label>
+
+        </div>
+
+        {rangeEnabled ? <RangeForm
+            className="data-entry-form"
+            inputFields={inputFields}
+            onSubmit={handleSubmit}
+        /> : <TextForm
             className="data-entry-form"
             textFields={[
                 'temperature',
@@ -93,7 +119,10 @@ const DataEntry = () => {
                 'radial_velocity',
                 'surface_gravity',]}
             onSubmit={handleSubmit}
-        />
+        />}
+
+
+
     </div>
 }
 
