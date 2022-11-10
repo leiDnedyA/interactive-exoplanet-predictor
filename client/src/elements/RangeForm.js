@@ -1,3 +1,4 @@
+import './RangeForm.css'
 import React, { useState } from "react";
 
 /**
@@ -78,7 +79,7 @@ class RangeForm extends React.Component {
             // let output = <output key={`output${i}`}>{this.state[field.name]}</output>
             let input = <input
                 key={`input${i}`} className="input text-input" name={field.name} type="range"
-                defaultValue={field.min} min={field.min} max={field.max} step={(field.max - field.min) / 25}
+                defaultValue={field.min} min={field.min} max={field.max} step={(field.max - field.min) / 100}
                 onChange={(e) => {
                     let newState = {}
                     newState[field.name] = parseFloat(e.target.value);
@@ -99,9 +100,15 @@ class RangeForm extends React.Component {
         return <form className={this.props.className ? this.props.className : ''} onSubmit={this.props.onSubmit}>
             {   //Filters through elements and adds text stating the current values
                 this.fieldElements.reduce((prev, curr, i) => {
-                    prev.push(curr);
                     if (curr.type == 'input') {
-                        prev.push(<output key={`output${i}`}>{this.state[curr.props.name]}</output>)
+                        prev.push(
+                            <div className="range-input-div" key={`input${i}`}>
+                                {curr}
+                                <output key={`output${i}`}>{this.state[curr.props.name]}</output>
+                            </div>
+                        )
+                    }else{
+                        prev.push(curr);
                     }
                     return prev
                 }, [])}

@@ -1,0 +1,23 @@
+.range-input-div {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 80% auto;
+    grid-template-areas: "input output";
+}
+
+@media (max-width: 700px) {
+    .range-input-div {
+        width: 100%;
+        display: grid;
+        grid-template-columns: 30% auto;
+        grid-template-areas: "input output";
+    }
+}
+
+.range-input-div>input {
+    grid-area: input;
+}
+
+.range-input-div>output {
+    grid-area: output;
+}
