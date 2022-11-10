@@ -35,4 +35,4 @@ By training and testing the model with a 0.2 sample rate, we got a 92% accuracy 
 - Allowing multiple predictions to be made at once as a big data set.
 - Adding more features to the model to increase accuracy.
 - Updating the model with new data each month.
-- Comparing the accuracy of the model to other machine learning models.
+- Comparing the accuracy of the model to other machine learning models
