@@ -1,7 +1,7 @@
 # Star System Generator
 
 ### Demo of Client:
-![Demo of test server interacting with client](https://media2.giphy.com/media/OIg06V7rvJhzfq5OXL/giphy.gif?cid=790b7611df74cf2a4eb885129296cf2196028d88359a5970&rid=giphy.gif&ct=g)
+![Demo of server interacting with client](https://media1.giphy.com/media/sKIkl2ERPk7vKhhq5E/giphy.gif?cid=790b76115b0e75f9b740ecd5d4cbb60e4dc7d09b8a13c228&rid=giphy.gif&ct=g)
 
 ## HOW TO RUN:
 ### Client
@@ -10,8 +10,11 @@
 3. Run ... npm install ... to install all required Node modules
 4. Run ... npm start ..., and a browser window will pop up containing the webpage
 
-### Server + API
-1. 
+### Server
+1. Make sure that you have Python 3 installed
+2. Install all of the dependencies in the dependency list (coming soon)
+3. Open a terminal in the root directory of the project (./)
+4. run ... python main.py ...
 
 ### Test Server
 0. Make sure you have Python 3 installed
