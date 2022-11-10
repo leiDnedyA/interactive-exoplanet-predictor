@@ -3,6 +3,7 @@
     display: grid;
     grid-template-columns: 80% auto;
     grid-template-areas: "input output";
+    justify-content: center;
 }
 
 @media (max-width: 700px) {
