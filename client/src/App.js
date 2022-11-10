@@ -4,6 +4,7 @@ import DataEntry from './pages/DataEntry';
 import Predictions from './pages/Predictions';
 import {FaGithub} from 'react-icons/fa'
 import WorldModel from './elements/WorldModel';
+import Loading from './pages/Loading';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
         <Route path="/" element={<DataEntry/>}/>
         <Route path="/predictions" element={<Predictions/>}/>
         <Route path="/model" element={<WorldModel/>}/>
+        <Route path="/loading" element={<Loading/>}/>
       </Routes>
 
       {/* 
