@@ -6,10 +6,16 @@ class WorldEngine {
         this.canvas = canvasRef.current;
 
         this.scene = new THREE.Scene();
-        this.camera = new THREE.Camera(75, this.canvas.height / this.canvas.width, 0.1, 1000);
+        this.camera = new THREE.PerspectiveCamera(75, 1, 0.1, 1000);
         this.renderer = new THREE.WebGLRenderer({ canvas: this.canvas });
-
     }
+
+    update() {
+        requestAnimationFrame(this.update.bind(this));
+        this.render();
+        this.cube.rotation.x += 0.05;
+    }
+
 
     render() {
 
@@ -17,23 +23,17 @@ class WorldEngine {
 
     }
 
-    update() {
-
-        this.render();
-
-        requestAnimationFrame(this.update);
-    }
-
     start() {
         //creating sample scene
-        const geometry = new THREE.BoxGeometry(1, 1, 1);
-        const material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
-        const cube = new THREE.Mesh(geometry, material);
-        this.scene.add(cube);
+        const geometry = new THREE.BoxGeometry(10, 10, 10);
+        const material = new THREE.MeshBasicMaterial({ color: 0x00ffff });
+        this.cube = new THREE.Mesh(geometry, material);
+        this.scene.add(this.cube);
 
-        this.camera.position.z = 5;
+        this.camera.position.z = 20;
+        this.camera.lookAt(this.cube.position)
 
-        requestAnimationFrame(this.update);
+        requestAnimationFrame(this.update.bind(this));
 
     }
 

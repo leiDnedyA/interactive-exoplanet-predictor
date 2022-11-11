@@ -14,7 +14,7 @@ class WorldModel extends React.Component {
     }
 
     render() {
-        return <canvas id="model-canvas" ref={this.canvasRef}></canvas>
+        return <canvas id="model-canvas" width="500px" height="500px" ref={this.canvasRef}></canvas>
     }
 }
 
