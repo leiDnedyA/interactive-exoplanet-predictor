@@ -19,16 +19,16 @@ class WorldEngine extends Engine {
 
     start() {
 
-        // // Creating sample scene with rotating cube
-        // const box = new BoxObject(new THREE.Vector3(0, 0, 0,), new THREE.Vector3(10, 10, 10));
-        // this.addGameObject(box);
-        // this.camera.position.z = 20;
+        // Creating sample scene with rotating cube
+        const box = new BoxObject(new THREE.Vector3(0, 0, 0,), new THREE.Vector3(10, 10, 10));
+        this.addGameObject(box);
+        this.camera.position.z = 20;
 
-        // this.camera.lookAt(box.position);
+        this.camera.lookAt(box.position);
 
-        // this.addUpdateFunction((deltaTime) => {
-        //     box.mesh.rotation.x += deltaTime / 1000;
-        // })
+        this.addUpdateFunction((deltaTime) => {
+            box.mesh.rotation.x += deltaTime / 1000;
+        })
 
         super.start();
 
