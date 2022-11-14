@@ -9,8 +9,13 @@ class WorldModel extends React.Component {
     }
 
     componentDidMount() {
+        
         this.world = new WorldEngine(this.canvasRef);
         this.world.start();
+    }
+
+    componentWillUnmount() {
+        this.world.end();
     }
 
     render() {

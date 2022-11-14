@@ -14,48 +14,6 @@ import React, { useState } from "react";
  * ]
  * 
  */
-// const RangeForm = ({ inputFields, className, onSubmit }) => {
-//     const fieldElements = []
-
-//     //creates a stateful object containing the inputs and their current values
-//     const [inputValues, setInputValues] = useState(
-//         inputFields.reduce((prev, input) => {
-//             prev[input.name] = input.min;
-//             return prev;
-//         }, {})
-//     )
-
-//     for (let i in inputFields) {
-//         //styles string in different ways
-//         let field = inputFields[i];
-//         let labelText = field.label;
-
-//         //creates elements based on string
-//         let label = <label key={`label${i}`} for={field.name}>{labelText}:</label>
-//         let output = <output>{inputValues[field]}</output>
-//         let input = <input
-//             key={`input${i}`} className="input text-input" name={field.name} type="range" 
-//             defaultValue={field.min} min={field.min} max={field.max} step={(field.max - field.min) / 25}
-//             onChange={(e)=>{
-//                 setInputValues((inputVals)=>{
-//                     inputVals[field.name] = parseFloat(e.target.value);
-//                     return inputVals;
-//                 });
-
-//             }}
-//             />
-
-//         //adds elements to fieldElements list
-//         fieldElements.push(label);
-//         fieldElements.push(input);
-//         fieldElements.push(output);
-//     }
-
-//     return <form className={className ? className : ''} onSubmit={onSubmit}>
-//         {fieldElements}
-//         <input className="input submit-button" type="submit" value="Submit" />
-//     </form>
-// }
 
 class RangeForm extends React.Component {
 
