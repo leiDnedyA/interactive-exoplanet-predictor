@@ -2,6 +2,8 @@ import Engine from "./Engine";
 import BoxObject from "./game_objects/BoxObject";
 import * as THREE from 'three';
 import { GUI } from 'dat.gui/build/dat.gui.js';
+import Star from "./game_objects/Star";
+import Planet from "./game_objects/Planet";
 
 /**
  * Features of WorldEngine Class
@@ -33,6 +35,9 @@ class WorldEngine extends Engine {
         this.starVariables = {};
         this.starVarData = {};
 
+        this.planetCount = 2;
+        this.planetObjects = [];
+
         for(let i in inputFields){
             let input = inputFields[i];
 
@@ -58,7 +63,7 @@ class WorldEngine extends Engine {
 
     start() {
 
-        // Creating sample scene with rotating cube
+        //// Creating sample scene with rotating cube
         // const box = new BoxObject(new THREE.Vector3(0, 0, 0,), new THREE.Vector3(10, 10, 10));
         // this.addGameObject(box);
         // this.camera.position.z = 20;
@@ -71,8 +76,39 @@ class WorldEngine extends Engine {
         //     // box.mesh.rotation.x += deltaTime / 1000;
         // })
 
+        this.star = new Star(new THREE.Vector3(0, 0, 0), this.starVariables);
+        this.addGameObject(this.star);
+        this.camera.position.z = 20;
+        this.camera.position.x = 5;
+        this.camera.lookAt(this.star.position);
+
+        this.updatePlanets();
+
         super.start();
 
+    }
+
+    updatePlanets(){
+        while (this.planetObjects.length != this.planetCount){
+            if(this.planetCount > this.planetObjects.length){
+                this.addPlanet();
+            }else{
+                this.removePlanet();
+            }
+        }
+    }
+
+    addPlanet(){
+
+        let newPlanet = new Planet(new THREE.Vector3(5, 0, 0));
+        this.planetObjects.push(newPlanet);
+        this.addGameObject(newPlanet);
+
+    }
+
+    removePlanet(){
+        let planet = this.planetObjects.pop();
+        this.removeGameObject(planet.id);
     }
 
     end(){
