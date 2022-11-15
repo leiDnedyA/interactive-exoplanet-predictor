@@ -35,7 +35,7 @@ class WorldEngine extends Engine {
         this.starVariables = {};
         this.starVarData = {};
 
-        this.planetCount = 2;
+        this.planetCount = 25;
         this.planetObjects = [];
 
         for(let i in inputFields){
@@ -99,11 +99,9 @@ class WorldEngine extends Engine {
     }
 
     addPlanet(){
-
-        let newPlanet = new Planet(new THREE.Vector3(5, 0, 0));
+        let newPlanet = new Planet(new THREE.Vector3(3 * (this.planetObjects.length + 1), 0, 0), 0x00ffff, .25);
         this.planetObjects.push(newPlanet);
         this.addGameObject(newPlanet);
-
     }
 
     removePlanet(){
