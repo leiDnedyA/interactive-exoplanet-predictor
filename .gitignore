@@ -21,3 +21,5 @@
 ./clientnpm-debug.log*
 ./clientyarn-debug.log*
 ./clientyarn-error.log*
+__pycache__/server.cpython-310.pyc
+Backend/Tree_algorithm/__pycache__/model_predictor.cpython-310.pyc
