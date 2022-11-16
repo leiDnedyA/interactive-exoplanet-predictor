@@ -4,6 +4,7 @@ import * as THREE from 'three';
 import { GUI } from 'dat.gui/build/dat.gui.js';
 import Star from "./game_objects/Star";
 import Planet from "./game_objects/Planet";
+import requestPrediction from "../networking/requestPrediction";
 
 /**
  * Features of WorldEngine Class
@@ -56,7 +57,16 @@ class WorldEngine extends Engine {
             let varData = this.starVarData[key]
             this.guiVarFolder.add(this.starVariables, key, varData.min, varData.max)
                 .onChange(()=>{
-                    console.log(this.starVariables)
+                    // console.log(this.starVariables);
+                    requestPrediction(this.starVariables)
+                        .then(json=>{
+                            // console.log(json)
+                            if(json.hasOwnProperty('number of planets')){
+                                this.planetCount = json['number of planets']
+                            }else{
+                                console.log('WARNING: invalid JSON recieved from server...');
+                            }
+                        })
                 });
 
         }
