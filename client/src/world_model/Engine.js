@@ -1,4 +1,6 @@
 import * as THREE from 'three';
+import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
+
 
 /**
  * Engine Class
@@ -17,7 +19,10 @@ class Engine {
         this.scene = new THREE.Scene();
         this.camera = new THREE.PerspectiveCamera(75, 1, 0.1, 1000);
         this.renderer = new THREE.WebGLRenderer({ canvas: this.canvas });
+        this.controls = new OrbitControls(this.camera, this.renderer.domElement);
+
         this.lastTime = Date.now();
+        
 
         this.gameObjects = gameObjects;
         this.updateFunctions = updateFunctions;
@@ -40,6 +45,7 @@ class Engine {
         }
 
         requestAnimationFrame(this.update.bind(this));
+        this.controls.update();
         this.render();
     }
 
@@ -96,6 +102,7 @@ class Engine {
     }
 
     start() {
+        this.controls.update();
         requestAnimationFrame(this.update.bind(this));
     }
 
