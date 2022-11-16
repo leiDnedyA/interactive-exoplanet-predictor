@@ -35,7 +35,7 @@ class WorldEngine extends Engine {
         this.starVariables = {};
         this.starVarData = {};
 
-        this.planetCount = 25;
+        this.planetCount = 2;
         this.planetObjects = [];
 
         for(let i in inputFields){
@@ -54,7 +54,10 @@ class WorldEngine extends Engine {
         for(let key in this.starVariables){
 
             let varData = this.starVarData[key]
-            this.guiVarFolder.add(this.starVariables, key, varData.min, varData.max);
+            this.guiVarFolder.add(this.starVariables, key, varData.min, varData.max)
+                .onChange(()=>{
+                    console.log(this.starVariables)
+                });
 
         }
 

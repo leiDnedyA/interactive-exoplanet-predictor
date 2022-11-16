@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import TextForm from '../elements/TextForm'
 import RangeForm from '../elements/RangeForm';
 import { useState } from 'react';
+import requestPrediction from '../networking/requestPrediction';
 
 const DataEntry = () => {
 
@@ -31,12 +32,7 @@ const DataEntry = () => {
             }
         }
 
-        const request = new Request('/predict?' + new URLSearchParams(
-            formData
-        ));
-
-        fetch(request)
-            .then((res) => res.json())
+        requestPrediction(formData)
             .then((json) => {
                 console.log(json);
                 let data = [];
@@ -50,7 +46,6 @@ const DataEntry = () => {
                 }
 
                 navigate('/predictions', { state: { data: data } });
-
             });
     }
 
