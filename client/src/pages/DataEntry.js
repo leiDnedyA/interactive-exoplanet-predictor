@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import TextForm from '../elements/TextForm'
 import RangeForm from '../elements/RangeForm';
 import { useState } from 'react';
-import requestPrediction from '../networking/requestPrediction';
+import {requestPrediction} from '../networking/APIRequests';
 
 const DataEntry = () => {
 

@@ -4,7 +4,7 @@ import * as THREE from 'three';
 import { GUI } from 'dat.gui/build/dat.gui.js';
 import Star from "./game_objects/Star";
 import Planet from "./game_objects/Planet";
-import requestPrediction from "../networking/requestPrediction";
+import {requestPrediction, requestPresets} from "../networking/APIRequests";
 
 /**
  * Features of WorldEngine Class
@@ -54,7 +54,6 @@ class WorldEngine extends Engine {
         }
 
         for(let key in this.starVariables){
-
             let varData = this.starVarData[key]
             let slider = this.guiVarFolder.add(this.starVariables, key, varData.min, varData.max);
             slider.setValue(varData.default)
@@ -63,6 +62,11 @@ class WorldEngine extends Engine {
         this.gui.domElement.addEventListener('click', ()=>{
            this.fetchPlanetCount(); 
         })
+
+        requestPresets()
+            .then((json)=>{
+                
+            });
 
         this.fetchPlanetCount();
 

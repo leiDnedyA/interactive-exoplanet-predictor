@@ -12,4 +12,15 @@ const requestPrediction = async (data) => {
 
 }
 
-export default requestPrediction;
+const requestPresets = async () => {
+
+    const request = new Request('/presets');
+
+    return new Promise((resolve, rej) => {
+        fetch(request)
+            .then((res) => {resolve(res.json())});
+    })
+
+}
+
+export {requestPrediction, requestPresets};
