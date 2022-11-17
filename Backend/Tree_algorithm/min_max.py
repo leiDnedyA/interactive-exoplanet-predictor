@@ -35,21 +35,6 @@ max_dens = x['st_dens'].max()
 max_radv = x['st_radv'].max()
 max_logg = x['st_logg'].max()
 
-# Print all the min and max values.
-print("Min teff: ", min_teff)
-print("Max teff: ", max_teff)
-print("Min rad: ", min_rad)
-print("Max rad: ", max_rad)
-print("Min mass: ", min_mass)
-print("Max mass: ", max_mass)
-print("Min met: ", min_met)
-print("Max met: ", max_met)
-print("Min age: ", min_age)
-print("Max age: ", max_age)
-print("Min dens: ", min_dens)
-print("Max dens: ", max_dens)
-print("Min radv: ", min_radv)
-print("Max radv: ", max_radv)
-print("Min logg: ", min_logg)
-print("Max logg: ", max_logg)
 
+
+print(p1)

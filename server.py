@@ -1,7 +1,9 @@
 import socketserver
 from urllib.parse import urlparse, parse_qs
 from http.server import BaseHTTPRequestHandler
-from Backend.Tree_algorithm import model_predictor
+from Backend.Tree_algorithm import model_predictor, preset
+from Backend.Tree_algorithm.train_predictor import true_df
+
 
 
 _hostName = "localhost"
@@ -29,14 +31,20 @@ class _Server(BaseHTTPRequestHandler):
             # x = [data['1'], data['2'], data['3'], data['4'], data['5'], data['6'], data['7'], data['8']]
             resString = str('{"number of planets":"' + str(model_predictor.Predict_Simple([x])[0]) +'"}')
         elif parsedUrl.path == '/presets':
+            data_pred = parse_qs(parsedUrl.query)
+            data = {k: float(v[0]) for k, v in data.items()}
+
+
             '''
             TODO:
                 - Implement a function that scrapes CSV file for examples of inputs that will result in each possible
                 - example: {1: {temperature: 100, radius: 2.5, etc}, 2: {temperature: 12, radius: 3.5, etc}}
                 - parse preset data to string and assign the value to the resString variable 
             '''
-            resString = str({"1": {"temperature": "500", "radius": 11}}) # example of how parsing will look
-        
+
+            resString = str({preset.onePlanet(true_df), preset.twoPlanets(true_df), preset.threePlanets(true_df), preset.fourPlanets(true_df), preset.fivePlanets(true_df), preset.sixPlanets(true_df), preset.sevenPlanets(true_df)})
+
+
         self.send_response(200)
         self.send_header("Content-type", "application/json")
         self.end_headers()
