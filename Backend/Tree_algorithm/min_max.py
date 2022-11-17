@@ -35,7 +35,3 @@ max_age = x['st_age'].max()
 max_dens = x['st_dens'].max()
 max_radv = x['st_radv'].max()
 max_logg = x['st_logg'].max()
-
-
-
-print(p1)
