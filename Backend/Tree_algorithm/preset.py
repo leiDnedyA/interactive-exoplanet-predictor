@@ -152,6 +152,5 @@ def sixPlanets(true_df):
 #     if pred_check == 7:
 #         return {'st_teff': st_teff, 'st_rad': st_rad, 'st_mass': st_mass, 'st_met': st_met, 'st_age': st_age, 'st_dens': st_dens, 'st_radv': st_radv, 'st_logg': st_logg}
     
-#     else:
-#         return False
-        
+    else:
+        return False
