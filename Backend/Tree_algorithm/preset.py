@@ -151,3 +151,6 @@ def sixPlanets(true_df):
 
 #     if pred_check == 7:
 #         return {'st_teff': st_teff, 'st_rad': st_rad, 'st_mass': st_mass, 'st_met': st_met, 'st_age': st_age, 'st_dens': st_dens, 'st_radv': st_radv, 'st_logg': st_logg}
+
+def allPlanets(true_df):
+    return {'1': onePlanet(true_df), '2': twoPlanets(true_df),  '3': threePlanets(true_df),  '4': fourPlanets(true_df),  '5': fivePlanets(true_df),  '6': sixPlanets(true_df)}
