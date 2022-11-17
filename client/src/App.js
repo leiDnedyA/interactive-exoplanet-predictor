@@ -1,5 +1,5 @@
 import './App.css';
-import {Route, Routes, useNavigate} from 'react-router-dom';
+import {Link, Route, Routes, useNavigate} from 'react-router-dom';
 import DataEntry from './pages/DataEntry';
 import Predictions from './pages/Predictions';
 import {FaGithub} from 'react-icons/fa'
@@ -25,7 +25,7 @@ function App() {
         Change github link once we change the link for the project
       */}
 
-      <div className="footer"><a href="https://github.com/leiDnedyA/interactive-exoplanet-predictor/">Follow us on GitHub! <FaGithub/></a></div>
+      <div className="footer"><strong>BETA:</strong> <Link to="/model">Interactive 3D Model</Link> | Give us a star on <a href="https://github.com/leiDnedyA/interactive-exoplanet-predictor/">GitHub</a>! <FaGithub/></div>
     </div>
   );
 }
