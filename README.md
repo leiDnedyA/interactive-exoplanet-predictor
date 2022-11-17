@@ -3,6 +3,9 @@
 ### Demo of Client:
 ![Demo of server interacting with client](https://media1.giphy.com/media/sKIkl2ERPk7vKhhq5E/giphy.gif?cid=790b76115b0e75f9b740ecd5d4cbb60e4dc7d09b8a13c228&rid=giphy.gif&ct=g)
 
+### Demo of Client Model:
+![Demo of server user interacting with model interface](https://media3.giphy.com/media/nix4uXdw3cUvqcy6Dh/giphy.gif?cid=790b7611daf1c8c5a60014aca7ad6717d5ef551f886a5918&rid=giphy.gif&ct=g)
+
 ## HOW TO RUN:
 ### Client
 1. Install the latest version of Node.js and npm (node package manager)
