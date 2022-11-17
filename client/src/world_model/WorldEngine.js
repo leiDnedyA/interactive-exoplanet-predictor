@@ -23,14 +23,14 @@ class WorldEngine extends Engine {
         this.guiVarFolder = this.gui.addFolder('Variables');
     
         const inputFields = [
-            { label: 'Temperature (Kelvin)', name: 'temperature', min: 575, max: 29300 },
-            { label: 'Radius', name: 'radius', min: 0.04, max: 83.8 },
-            { label: 'Stellar Mass', name: 'stellar_mass', min: 2.78, max: 10.94 },
-            { label: 'Metallicity', name: 'metallicity', min: -1, max: .48 },
-            { label: 'Age', name: 'age', min: 0, max: 14.9 },
-            { label: 'Density', name: 'density', min: 0.00401, max: 114 },
-            { label: 'Radial Velocity', name: 'radial_velocity', min: -118, max: 244.99 },
-            { label: 'Surface Gravity', name: 'surface_gravity', min: 1.3, max: 5.52 },
+            { label: 'Temperature (Kelvin)', name: 'temperature', min: 575, max: 29300, def: 5356.3},
+            { label: 'Radius', name: 'radius', min: 0.04, max: 83.8, def: 0.86},
+            { label: 'Stellar Mass', name: 'stellar_mass', min: 0, max: 23.56, def: 0.94},
+            { label: 'Metallicity', name: 'metallicity', min: -1, max: .48, def: 0.14},
+            { label: 'Age', name: 'age', min: 0, max: 14.9, def: 2.8},
+            { label: 'Density', name: 'density', min: 0.00401, max: 276, def: 2.0640},
+            { label: 'Radial Velocity', name: 'radial_velocity', min: -118, max: 244.99, def: 0.64},
+            { label: 'Surface Gravity', name: 'surface_gravity', min: 1.3, max: 5.52, def: 1.3},
         ]
 
         this.starVariables = {};
@@ -48,6 +48,7 @@ class WorldEngine extends Engine {
                 label: input.label,
                 min: input.min,
                 max: input.max,
+                default: input.def,
                 name: input.name
             }
         }
@@ -55,22 +56,15 @@ class WorldEngine extends Engine {
         for(let key in this.starVariables){
 
             let varData = this.starVarData[key]
-            this.guiVarFolder.add(this.starVariables, key, varData.min, varData.max)
-                .onChange(()=>{
-                    // console.log(this.starVariables);
-                    requestPrediction(this.starVariables)
-                        .then(json=>{
-                            // console.log(json)
-                            if(json.hasOwnProperty('number of planets')){
-                                this.planetCount = json['number of planets']
-                            }else{
-                                console.log('WARNING: invalid JSON recieved from server...');
-                            }
-                        })
-                });
-
+            let slider = this.guiVarFolder.add(this.starVariables, key, varData.min, varData.max);
+            slider.setValue(varData.default)
         }
 
+        this.gui.domElement.addEventListener('click', ()=>{
+           this.fetchPlanetCount(); 
+        })
+
+        this.fetchPlanetCount();
 
     }
 
@@ -109,6 +103,20 @@ class WorldEngine extends Engine {
                 this.removePlanet();
             }
         }
+    }
+
+    fetchPlanetCount() {
+        // console.log(this.starVariables);
+        requestPrediction(this.starVariables)
+        .then(json=>{
+            console.log(json)
+            if(json.hasOwnProperty('number of planets')){
+                this.planetCount = parseInt(json['number of planets'])
+                this.updatePlanets();
+            }else{
+                console.log('WARNING: invalid JSON recieved from server...');
+            }
+        });
     }
 
     addPlanet(){
