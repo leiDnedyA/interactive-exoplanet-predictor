@@ -154,3 +154,6 @@ def sevenPlanets(true_df):
     
     else:
         return False
+
+def allPlanets(true_df):
+    return {'1': onePlanet(true_df), '2': twoPlanets(true_df),  '3': threePlanets(true_df),  '4': fourPlanets(true_df),  '5': fivePlanets(true_df),  '6': sixPlanets(true_df)}
