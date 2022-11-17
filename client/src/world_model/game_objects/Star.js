@@ -23,6 +23,20 @@ class Star extends MeshGameObject{
             new THREE.MeshBasicMaterial({color: 0xffff00}));
         this.data = data;
     }
+
+    setColorFromRGB(rgb){
+
+        let [r, g, b] = rgb;
+
+        function valueToHex(c) {
+            return c.toString(16);
+        }
+
+        const hexString = valueToHex(r) + valueToHex(g) + valueToHex(b);
+        console.log(hexString)
+        const hexNumber = Number("0x" + hexString)
+        this.mesh.material.color.setHex(hexNumber);
+    }
 }
 
 export default Star;

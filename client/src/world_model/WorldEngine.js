@@ -5,6 +5,8 @@ import { GUI } from 'dat.gui/build/dat.gui.js';
 import Star from "./game_objects/Star";
 import Planet from "./game_objects/Planet";
 import {requestPrediction, requestPresets} from "../networking/APIRequests";
+import tempToBV from "./astronomy_calculations/tempToBV";
+import bvToRGB from "./astronomy_calculations/bvToRGB";
 
 /**
  * Features of WorldEngine Class
@@ -60,6 +62,12 @@ class WorldEngine extends Engine {
         }
 
         this.sliders = {};
+
+        this.optionalStarData = {
+            "name": ''
+        }
+
+        this.gui.add(this.optionalStarData, 'name');
 
         for(let key in this.starVariables){
             let varData = this.starVarData[key]
@@ -136,10 +144,20 @@ class WorldEngine extends Engine {
         this.camera.position.x = 5;
         this.camera.lookAt(this.star.position);
 
-        this.updatePlanets();
+        this.updateSystem();
 
         super.start();
 
+    }
+
+    updateSystem(){
+        this.updateStar();
+        this.updatePlanets();
+    }
+
+    updateStar(){
+        let colorList = bvToRGB(tempToBV(this.starVariables.temperature));
+        this.star.setColorFromRGB(colorList)
     }
 
     updatePlanets(){
@@ -157,7 +175,7 @@ class WorldEngine extends Engine {
         .then(json=>{
             if(json.hasOwnProperty('number of planets')){
                 this.planetCount = parseInt(json['number of planets'])
-                this.updatePlanets();
+                this.updateSystem();
             }else{
                 console.log('WARNING: invalid JSON recieved from server...');
             }
