@@ -1,4 +1,4 @@
-import model_predictor
+from Backend.Tree_algorithm import model_predictor
 
 def onePlanet(true_df):
     p1 = true_df.loc[true_df['sy_pnum'] == 1]

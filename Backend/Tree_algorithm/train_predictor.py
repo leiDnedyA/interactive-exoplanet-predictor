@@ -3,13 +3,14 @@
 from sklearn import metrics
 from sklearn.model_selection import train_test_split
 from sklearn.ensemble import RandomForestClassifier
+from Backend.Utils import directory_manager
 # Pandas for database processing
 import pandas as pd
 # Joblib to dump and laod the model
 import joblib
 
 # DataFrame, we read the csv with pandas.
-df = pd.read_csv('Backend\\Data\\New_data_nov_2022.csv', sep=',')
+df = pd.read_csv(directory_manager.getDirectory('Backend\\Data\\New_data_nov_2022.csv'), sep=',')
 
 # Select and classify the variables considered due to the correlation study.
 # In t

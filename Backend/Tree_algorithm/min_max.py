@@ -1,6 +1,7 @@
 import pandas as pd
+from Backend.Utils import directory_manager
 # DataFrame, we read the csv with pandas.
-df = pd.read_csv('Backend\Data\PSCompPars_2021.04.20_19.50.36.csv', sep=',')
+df = pd.read_csv(directory_manager.getDirectory('Backend\Data\PSCompPars_2021.04.20_19.50.36.csv'), sep=',')
 
 # Select and classify the variables considered due to the correlation study.
 # In t

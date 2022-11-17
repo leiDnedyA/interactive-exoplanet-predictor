@@ -33,6 +33,7 @@ class _Server(BaseHTTPRequestHandler):
         elif parsedUrl.path == '/presets':
             data_pred = parse_qs(parsedUrl.query)
             data = {k: float(v[0]) for k, v in data.items()}
+            print(data)
 
 
             '''
