@@ -3,7 +3,7 @@ from urllib.parse import urlparse, parse_qs
 from http.server import BaseHTTPRequestHandler
 from Backend.Tree_algorithm import model_predictor, preset
 from Backend.Tree_algorithm.train_predictor import true_df
-
+import json
 
 
 _hostName = "localhost"
@@ -45,7 +45,7 @@ class _Server(BaseHTTPRequestHandler):
                 - parse preset data to string and assign the value to the resString variable 
             '''
 
-            resString = str(preset.allPlanets(true_df))
+            resString = json.dumps(preset.allPlanets(true_df))
 
 
         self.send_response(200)

@@ -36,6 +36,12 @@ class WorldEngine extends Engine {
         this.starVariables = {};
         this.starVarData = {};
 
+        this.presets = {};
+
+        this.currentPreset = {
+            'planetCount': null
+        };
+
         this.planetCount = 2;
         this.planetObjects = [];
 
@@ -53,11 +59,16 @@ class WorldEngine extends Engine {
             }
         }
 
+        this.sliders = {};
+
         for(let key in this.starVariables){
             let varData = this.starVarData[key]
             let slider = this.guiVarFolder.add(this.starVariables, key, varData.min, varData.max);
-            slider.setValue(varData.default)
+            slider.setValue(varData.default);
+            
+            this.sliders[key] = slider;
         }
+
 
         this.gui.domElement.addEventListener('click', ()=>{
            this.fetchPlanetCount(); 
@@ -65,7 +76,39 @@ class WorldEngine extends Engine {
 
         requestPresets()
             .then((json)=>{
+
+                this.presets = json;
+
+                let dropdownValues = Object.keys(this.presets).reduce(
+                    (prev, val) => {
+                        prev[`${val} Planet(s)`] = val;
+                        return prev;
+                    }, {}
+                );
                 
+                this.gui.add(this.currentPreset, 'planetCount', dropdownValues)
+                    .onChange(() => {
+                        let preset = this.presets[this.currentPreset.planetCount];
+                        
+                        let keyTranslations = {
+                            st_age: 'age',
+                            st_dens: 'density',
+                            st_met: 'metallicity',
+                            st_logg: 'surface_gravity',
+                            st_mass: 'stellar_mass',
+                            st_rad: 'radius',
+                            st_radv: 'radial_velocity',
+                            st_teff: 'temperature'
+                        }
+
+
+                        for(let key in preset){
+                            let val = preset[key];
+                            this.starVariables[keyTranslations[key]] = val;
+                            this.sliders[keyTranslations[key]].setValue(val);
+                        }
+
+                    });
             });
 
         this.fetchPlanetCount();
@@ -110,10 +153,8 @@ class WorldEngine extends Engine {
     }
 
     fetchPlanetCount() {
-        // console.log(this.starVariables);
         requestPrediction(this.starVariables)
         .then(json=>{
-            console.log(json)
             if(json.hasOwnProperty('number of planets')){
                 this.planetCount = parseInt(json['number of planets'])
                 this.updatePlanets();

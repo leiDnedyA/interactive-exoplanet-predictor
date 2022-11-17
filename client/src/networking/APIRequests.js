@@ -18,7 +18,9 @@ const requestPresets = async () => {
 
     return new Promise((resolve, rej) => {
         fetch(request)
-            .then((res) => {resolve(res.json())});
+            .then((res) => {
+                resolve(res.json())
+            });
     })
 
 }
