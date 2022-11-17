@@ -133,24 +133,25 @@ def sixPlanets(true_df):
     else:
         return False
 
-def sevenPlanets(true_df):
-    p7 = true_df.loc[true_df['sy_pnum'] == 7]
+# def sevenPlanets(true_df):
+#     p7 = true_df.loc[true_df['sy_pnum'] == 7]
 
-    st_teff = p7.iloc[0][2]
-    st_rad = p7.iloc[0][3]
-    st_mass = p7.iloc[0][4]
-    st_met = p7.iloc[0][5]
-    st_age = p7.iloc[0][6]
-    st_dens = p7.iloc[0][7]
-    st_radv = p7.iloc[0][8]
-    st_logg = p7.iloc[0][9]
+#     st_teff = p7.iloc[0][2]
+#     st_rad = p7.iloc[0][3]
+#     st_mass = p7.iloc[0][4]
+#     st_met = p7.iloc[0][5]
+#     st_age = p7.iloc[0][6]
+#     st_dens = p7.iloc[0][7]
+#     st_radv = p7.iloc[0][8]
+#     st_logg = p7.iloc[0][9]
 
-    features_list = [st_teff, st_rad, st_mass, st_met, st_age, st_dens, st_radv, st_logg]
+#     features_list = [st_teff, st_rad, st_mass, st_met, st_age, st_dens, st_radv, st_logg]
 
-    pred_check = model_predictor.Predict_Simple([features_list])
+#     pred_check = model_predictor.Predict_Simple([features_list])
 
-    if pred_check == 7:
-        return {'st_teff': st_teff, 'st_rad': st_rad, 'st_mass': st_mass, 'st_met': st_met, 'st_age': st_age, 'st_dens': st_dens, 'st_radv': st_radv, 'st_logg': st_logg}
+#     if pred_check == 7:
+#         return {'st_teff': st_teff, 'st_rad': st_rad, 'st_mass': st_mass, 'st_met': st_met, 'st_age': st_age, 'st_dens': st_dens, 'st_radv': st_radv, 'st_logg': st_logg}
     
-    else:
-        return False
+#     else:
+#         return False
+        

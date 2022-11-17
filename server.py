@@ -43,7 +43,7 @@ class _Server(BaseHTTPRequestHandler):
                 - parse preset data to string and assign the value to the resString variable 
             '''
 
-            resString = str({"1": preset.onePlanet(true_df), "2": preset.twoPlanets(true_df), "3": preset.threePlanets(true_df), "4": preset.fourPlanets(true_df), "5": preset.fivePlanets(true_df), "6": preset.sixPlanets(true_df), "7": preset.sevenPlanets(true_df)})
+            resString = str({"1": preset.onePlanet(true_df), "2": preset.twoPlanets(true_df), "3": preset.threePlanets(true_df), "4": preset.fourPlanets(true_df), "5": preset.fivePlanets(true_df), "6": preset.sixPlanets(true_df)})
 
 
         self.send_response(200)
