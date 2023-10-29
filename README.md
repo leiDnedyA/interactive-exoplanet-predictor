@@ -22,10 +22,11 @@ cd interactive-exoplanet-predictor
 3. Run the client in a dev server with `npm start`
 
 ### Server
-1. In the main project directory, run `source venv/src/activate` to load the python virtual environment
-2. Install Python dependencies by running `pip3 install -r requirements.txt`
-3. CD into the `/api` directory by running `cd api`
-4. Start the server with `python3 -m main`
+1. Set up the python virtual environment by running `python3 -m venv venv`
+2. In the main project directory, run `source venv/src/activate` to load the python virtual environment
+3. Install Python dependencies by running `pip3 install -r requirements.txt`
+4. CD into the `/api` directory by running `cd api`
+5. Start the server with `python3 -m main`
 
 # What happens in the backend:
 We implemented the Random Forest machine learning model mainly because it has the highest accuracy of all the models we tested. We used the scikit-learn library to implement the model. We used the data from the [Exoplanet Archive](https://exoplanetarchive.ipac.caltech.edu/cgi-bin/TblView/nph-tblView?app=ExoTbls&config=PS) to train the model. We used the following features to train the model:
