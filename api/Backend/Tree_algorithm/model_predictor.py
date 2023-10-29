@@ -1,5 +1,5 @@
 import joblib
-from Backend.Utils import directory_manager
+from ..Utils import directory_manager
 
 def Predict_Simple(x):
     # Load the model

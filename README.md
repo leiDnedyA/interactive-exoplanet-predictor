@@ -9,22 +9,23 @@
 
 
 ## HOW TO RUN:
+
+Clone the repo and open the project directory.
+```
+git clone https://github.com/leiDnedyA/interactive-exoplanet-predictor
+cd interactive-exoplanet-predictor
+```
+
 ### Client
-1. Install the latest version of Node.js and npm (node package manager)
-2. Open a terminal window (make sure you're in the client directory)
-3. Run ... npm install ... to install all required Node modules
-4. Run ... npm start ..., and a browser window will pop up containing the webpage
+1. Open the client directory by running `cd client`
+2. Install NPM dependencies by running `npm i` (first you'll need NPM installed on your machine)
+3. Run the client in a dev server with `npm start`
 
 ### Server
-1. Make sure that you have Python 3 installed
-2. Install all of the dependencies in the dependency list (coming soon)
-3. Open a terminal in the root directory of the project (./)
-4. run ... python main.py ...
-
-### Test Server
-0. Make sure you have Python 3 installed
-1. Open a terminal in the ./test_server directory
-2. Run ... python main.py ...
+1. In the main project directory, run `source venv/src/activate` to load the python virtual environment
+2. Install Python dependencies by running `pip3 install -r requirements.txt`
+3. CD into the `/api` directory by running `cd api`
+4. Start the server with `python3 -m main`
 
 # What happens in the backend:
 We implemented the Random Forest machine learning model mainly because it has the highest accuracy of all the models we tested. We used the scikit-learn library to implement the model. We used the data from the [Exoplanet Archive](https://exoplanetarchive.ipac.caltech.edu/cgi-bin/TblView/nph-tblView?app=ExoTbls&config=PS) to train the model. We used the following features to train the model:

@@ -1,4 +1,4 @@
-from api.server import startServer
+from src.server import startServer
 
 def _main():
     port = 3001
