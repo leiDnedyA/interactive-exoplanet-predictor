@@ -1,3 +1,3 @@
-import model_predictor
+from Backend.Tree_algorithm.model_predictor import Predict_Simple
 x = [0, 0, 0, 0, 0, 0, 0, 0]
-print(model_predictor.Predict_Simple([x])[0])
+print(Predict_Simple([x])[0])
