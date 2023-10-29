@@ -13,18 +13,15 @@ function App() {
         <h1>Star System Generator</h1>
         <p>Predict data about star systems based on basic information about the star!</p>
       </div>
+	{/*
       <Routes>
         <Route path="/" element={<DataEntry/>}/>
         <Route path="/predictions" element={<Predictions/>}/>
         <Route path="/model" element={<WorldModel/>}/>
         <Route path="/loading" element={<Loading/>}/>
       </Routes>
-
-      {/* 
-      REMINDER:
-        Change github link once we change the link for the project
-      */}
-
+		*/}	
+	<WorldModel/>
       <div className="footer"><strong>BETA:</strong> <Link to="/model">Interactive 3D Model</Link> | Give us a star on <a href="https://github.com/leiDnedyA/interactive-exoplanet-predictor/">GitHub</a>! <FaGithub/></div>
     </div>
   );
