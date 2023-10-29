@@ -23,7 +23,6 @@ class Engine {
 
         this.lastTime = Date.now();
         
-
         this.gameObjects = gameObjects;
         this.updateFunctions = updateFunctions;
 
@@ -104,6 +103,20 @@ class Engine {
     start() {
         this.controls.update();
         requestAnimationFrame(this.update.bind(this));
+	
+        const handleResize = () => {
+            this.camera.aspect = window.innerWidth / window.innerHeight;
+            this.camera.updateProjectionMatrix();
+
+			this.canvas.width = window.innerWidth;
+            this.canvas.height = window.innerHeight;
+
+            this.renderer.setSize(window.innerWidth, window.innerHeight);
+        }
+
+        handleResize();
+
+		window.addEventListener('resize', handleResize);
     }
 
 }
