@@ -1,0 +1,18 @@
+
+.DataEntry {
+    margin: 25px;
+    padding: 5px;
+    width: 40%;
+}
+
+.data-entry-form {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    padding: 5px;
+    width: 100%;
+}
+
+.input {
+    margin: 5px;
+}
