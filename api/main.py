@@ -1,8 +1,5 @@
-from src.server import startServer
-
-def _main():
-    port = 3001
-    startServer(port)
+from src.server import app
 
 if __name__ == '__main__':
-    _main()
+    port = 3001
+    app.run(host='0.0.0.0', port=port)

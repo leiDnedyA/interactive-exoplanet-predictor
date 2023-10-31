@@ -1,27 +1,20 @@
-
 const requestPrediction = async (data) => {
     
-    const request = new Request('/predict?' + new URLSearchParams(
+    const response = await fetch('/api/predict?' + new URLSearchParams(
         data
     ));
     
-    return new Promise((resolve, rej) => {
-        fetch(request)
-            .then((res) => {resolve(res.json())})
-    });
+    const responseJSON = await response.json();
 
+    return responseJSON;
 }
 
 const requestPresets = async () => {
 
-    const request = new Request('/presets');
+    const response = await fetch('/api/presets');
+    const responseJSON = await response.json();
 
-    return new Promise((resolve, rej) => {
-        fetch(request)
-            .then((res) => {
-                resolve(res.json())
-            });
-    })
+    return responseJSON;
 
 }
 

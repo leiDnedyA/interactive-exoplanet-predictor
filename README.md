@@ -19,7 +19,8 @@ cd interactive-exoplanet-predictor
 ### Client
 1. Open the client directory by running `cd client`
 2. Install NPM dependencies by running `npm i` (first you'll need NPM installed on your machine)
-3. Run the client in a dev server with `npm start`
+3. Run the client in a dev server with `npm run dev`
+4. Open your browser and got to `http://localhost:8080/`
 
 ### Server
 1. Set up the python virtual environment by running `python3 -m venv venv`
