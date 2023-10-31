@@ -76,7 +76,6 @@ class WorldEngine extends Engine {
 
         requestPresets()
             .then((json)=>{
-
                 this.presets = json;
 
                 let dropdownValues = Object.keys(this.presets).reduce(
