@@ -18,12 +18,11 @@ cd interactive-exoplanet-predictor
 ```
 
 ### Run in development mode
-1. Run `./devstart` to start the API and frontend
-2. Open your browser and got to `http://localhost:8080/`
+1. Run `./devstart` to start the API and frontend. The API and client should be started automatically, and your browser will open an instance of the client.
 
 ### Build and run
 1. run `./buildstart`
-2. Open your browser to http://localhost:3001/
+2. Open your browser to http://localhost:3000/. If you've changed any of the ports in `.env`, you may have to open localhost with at different port.
 
 # What happens in the model:
 We implemented the Random Forest machine learning model mainly because it has the highest accuracy of all the models we tested. We used the scikit-learn library to implement the model. We used the data from the [Exoplanet Archive](https://exoplanetarchive.ipac.caltech.edu/cgi-bin/TblView/nph-tblView?app=ExoTbls&config=PS) to train the model. We used the following features to train the model:
