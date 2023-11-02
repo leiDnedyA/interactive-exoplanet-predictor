@@ -14,22 +14,18 @@ Clone the repo and open the project directory.
 ```
 git clone https://github.com/leiDnedyA/interactive-exoplanet-predictor
 cd interactive-exoplanet-predictor
+./setup.sh # installs dependencies for API and frontend
 ```
 
-### Client
-1. Open the client directory by running `cd client`
-2. Install NPM dependencies by running `npm i` (first you'll need NPM installed on your machine)
-3. Run the client in a dev server with `npm run dev`
-4. Open your browser and got to `http://localhost:8080/`
+### Run in development mode
+1. Run `./devstart.sh` to start the API and frontend
+2. Open your browser and got to `http://localhost:8080/`
 
-### Server
-1. Set up the python virtual environment by running `python3 -m venv venv`
-2. In the main project directory, run `source venv/src/activate` to load the python virtual environment
-3. Install Python dependencies by running `pip3 install -r requirements.txt`
-4. CD into the `/api` directory by running `cd api`
-5. Start the server with `python3 -m main`
+### Build and run
+1. run `./buildstart.sh`
+2. Open your browser to http://localhost:3001/
 
-# What happens in the backend:
+# What happens in the model:
 We implemented the Random Forest machine learning model mainly because it has the highest accuracy of all the models we tested. We used the scikit-learn library to implement the model. We used the data from the [Exoplanet Archive](https://exoplanetarchive.ipac.caltech.edu/cgi-bin/TblView/nph-tblView?app=ExoTbls&config=PS) to train the model. We used the following features to train the model:
 - Stellar Mass
 - Stellar Radius

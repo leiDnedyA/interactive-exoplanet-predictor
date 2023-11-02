@@ -4,13 +4,15 @@ from Backend.Tree_algorithm.train_predictor import true_df
 
 app = Flask(__name__)
 
+BUILD_PATH = '../../client/dist'
+
 @app.route('/')
-def hello():
-    return 'Hello, world'
+def home():
+    return send_from_directory(BUILD_PATH, 'index.html')
 
 @app.route('/<path:path>')
 def send_report(path):
-    return send_from_directory('../../client/dist', path)
+    return send_from_directory(BUILD_PATH, path)
 
 @app.route('/api/presets')
 def get_presets():
