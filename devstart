@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+xdg-open http://localhost:8080/
+
+bash startapi -d & bash startclient && fg
+
+exit 0
