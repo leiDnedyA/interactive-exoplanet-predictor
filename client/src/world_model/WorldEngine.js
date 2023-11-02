@@ -130,11 +130,13 @@ class WorldEngine extends Engine {
         // })
 
         this.star = new Star(new THREE.Vector3(0, 0, 0), this.starVariables);
+	this.light = new THREE.PointLight( 0xffffff, 40, 500);
         this.addGameObject(this.star);
         this.camera.position.z = 20;
         this.camera.position.x = 5;
         this.camera.lookAt(this.star.position);
 
+	this.scene.add(this.light); // change this
         this.updatePlanets();
 
         super.start();

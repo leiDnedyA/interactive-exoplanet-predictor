@@ -5,7 +5,7 @@ class Planet extends MeshGameObject{
     constructor(position, color = 0x0000ff, radius = 1){
         super(position,
             new THREE.SphereGeometry(radius),
-            new THREE.MeshBasicMaterial({color: color}));
+            new THREE.MeshStandardMaterial({color: color}));
     }
 }
 

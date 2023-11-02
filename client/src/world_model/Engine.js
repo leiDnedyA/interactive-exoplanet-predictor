@@ -108,7 +108,7 @@ class Engine {
             this.camera.aspect = window.innerWidth / window.innerHeight;
             this.camera.updateProjectionMatrix();
 
-			this.canvas.width = window.innerWidth;
+	    this.canvas.width = window.innerWidth;
             this.canvas.height = window.innerHeight;
 
             this.renderer.setSize(window.innerWidth, window.innerHeight);
