@@ -1,6 +1,9 @@
 #!/usr/bin/env bash
 
+source .env
+
 export DEBUG_MODE=false
+export PORT=$BUILD_PORT
 
 while getopts "hd" option; do
 	case $option in
@@ -13,6 +16,7 @@ while getopts "hd" option; do
 			;;
 		d) # run in debug mode
 			export DEBUG_MODE=true
+			export PORT=$API_PORT
 			;;
 	esac
 done

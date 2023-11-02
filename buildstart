@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+source .env
+
 bash build
 
 bash api & xdg-open http://localhost:3001/

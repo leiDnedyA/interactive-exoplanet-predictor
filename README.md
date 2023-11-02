@@ -14,15 +14,15 @@ Clone the repo and open the project directory.
 ```
 git clone https://github.com/leiDnedyA/interactive-exoplanet-predictor
 cd interactive-exoplanet-predictor
-./setup.sh # installs dependencies for API and frontend
+./setup # installs dependencies for API and frontend
 ```
 
 ### Run in development mode
-1. Run `./devstart.sh` to start the API and frontend
+1. Run `./devstart` to start the API and frontend
 2. Open your browser and got to `http://localhost:8080/`
 
 ### Build and run
-1. run `./buildstart.sh`
+1. run `./buildstart`
 2. Open your browser to http://localhost:3001/
 
 # What happens in the model:
