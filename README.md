@@ -1,12 +1,7 @@
 # Star System Generator
 
-### Demo of Client Model:
-![Demo of server user interacting with model interface](https://media3.giphy.com/media/nix4uXdw3cUvqcy6Dh/giphy.gif?cid=790b7611daf1c8c5a60014aca7ad6717d5ef551f886a5918&rid=giphy.gif&ct=g)
-
-
-### Demo of Client Form:
-![Demo of server interacting with client](https://media1.giphy.com/media/sKIkl2ERPk7vKhhq5E/giphy.gif?cid=790b76115b0e75f9b740ecd5d4cbb60e4dc7d09b8a13c228&rid=giphy.gif&ct=g)
-
+### Demo:
+![DEMO](demo.gif)
 
 ## HOW TO RUN:
 
@@ -14,22 +9,17 @@ Clone the repo and open the project directory.
 ```
 git clone https://github.com/leiDnedyA/interactive-exoplanet-predictor
 cd interactive-exoplanet-predictor
+./setup # installs dependencies for API and frontend
 ```
 
-### Client
-1. Open the client directory by running `cd client`
-2. Install NPM dependencies by running `npm i` (first you'll need NPM installed on your machine)
-3. Run the client in a dev server with `npm run dev`
-4. Open your browser and got to `http://localhost:8080/`
+### Run in development mode
+1. Run `./devstart` to start the API and frontend. The API and client should be started automatically, and your browser will open an instance of the client.
 
-### Server
-1. Set up the python virtual environment by running `python3 -m venv venv`
-2. In the main project directory, run `source venv/src/activate` to load the python virtual environment
-3. Install Python dependencies by running `pip3 install -r requirements.txt`
-4. CD into the `/api` directory by running `cd api`
-5. Start the server with `python3 -m main`
+### Build and run
+1. run `./buildstart`
+2. Open your browser to http://localhost:3000/. If you've changed any of the ports in `.env`, you may have to open localhost with at different port.
 
-# What happens in the backend:
+# What happens in the model:
 We implemented the Random Forest machine learning model mainly because it has the highest accuracy of all the models we tested. We used the scikit-learn library to implement the model. We used the data from the [Exoplanet Archive](https://exoplanetarchive.ipac.caltech.edu/cgi-bin/TblView/nph-tblView?app=ExoTbls&config=PS) to train the model. We used the following features to train the model:
 - Stellar Mass
 - Stellar Radius

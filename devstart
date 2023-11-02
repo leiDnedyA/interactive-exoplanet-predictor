@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+source .env
+
+xdg-open "http://localhost:$FRONTEND_PORT/"
+
+bash startapi -d & bash startclient && fg
+
+exit 0

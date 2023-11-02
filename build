@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+echo Starting pre-build...
+
+echo Deleting previous build
+bash clean
+
+cd client
+
+echo Starting build...
+npm run build
+
+echo Build complete!
+exit 0
