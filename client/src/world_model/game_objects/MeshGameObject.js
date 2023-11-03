@@ -1,12 +1,11 @@
 import GameObject from "./GameObject";
 import * as THREE from 'three';
 
-
-
 class MeshGameObject extends GameObject {
     constructor(position, geometry, material) {
         super(position);
         this.mesh = new THREE.Mesh(geometry, material);
+	this.update(0);
     }
 
     getDimensions() {
