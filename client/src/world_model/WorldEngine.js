@@ -3,7 +3,7 @@ import BoxObject from "./game_objects/BoxObject";
 import * as THREE from 'three';
 import { GUI } from 'dat.gui/build/dat.gui.js';
 import Star from "./game_objects/Star";
-import Planet from "./game_objects/Planet";
+import PlanetOrbit from "./game_objects/PlanetOrbit";
 import {requestPrediction, requestPresets} from "../networking/APIRequests";
 
 /**
@@ -120,7 +120,8 @@ class WorldEngine extends Engine {
 	this.light = new THREE.PointLight( 0xffffff, 100, 0, 1.5);
         this.addGameObject(this.star);
         this.camera.position.z = 20;
-        this.camera.position.x = 5;
+        this.camera.position.x = -20;
+	this.camera.position.y = -20;
         this.camera.lookAt(this.star.position);
 
 	this.scene.add(this.light); // change this
@@ -153,7 +154,7 @@ class WorldEngine extends Engine {
     }
 
     addPlanet(){
-        let newPlanet = new Planet(.2, this.planetObjects.length + 1, 0x00ffff, .25);
+        let newPlanet = new PlanetOrbit(.5, (this.planetObjects.length + 1) * 10, 0x00ffff);
         this.planetObjects.push(newPlanet);
         this.addGameObject(newPlanet);
     }
