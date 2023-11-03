@@ -116,21 +116,8 @@ class WorldEngine extends Engine {
 
     start() {
 
-        //// Creating sample scene with rotating cube
-        // const box = new BoxObject(new THREE.Vector3(0, 0, 0,), new THREE.Vector3(10, 10, 10));
-        // this.addGameObject(box);
-        // this.camera.position.z = 20;
-
-        // this.camera.lookAt(box.position);
-
-        // this.guiVarFolder.add(box.mesh.rotation, 'x', 0, Math.PI * 2);
-
-        // this.addUpdateFunction((deltaTime) => {
-        //     // box.mesh.rotation.x += deltaTime / 1000;
-        // })
-
         this.star = new Star(new THREE.Vector3(0, 0, 0), this.starVariables);
-	this.light = new THREE.PointLight( 0xffffff, 40, 500);
+	this.light = new THREE.PointLight( 0xffffff, 100, 0, 1.5);
         this.addGameObject(this.star);
         this.camera.position.z = 20;
         this.camera.position.x = 5;
@@ -166,7 +153,7 @@ class WorldEngine extends Engine {
     }
 
     addPlanet(){
-        let newPlanet = new Planet(new THREE.Vector3(3 * (this.planetObjects.length + 1), 0, 0), 0x00ffff, .25);
+        let newPlanet = new Planet(.2, this.planetObjects.length + 1, 0x00ffff, .25);
         this.planetObjects.push(newPlanet);
         this.addGameObject(newPlanet);
     }
