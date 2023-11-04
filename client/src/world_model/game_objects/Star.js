@@ -69,7 +69,6 @@ class Star extends MeshGameObject{
 	updateData(newData) {
 		this.data = newData;
 		this.mesh.material.color = new THREE.Color(calculateStarColor(this.data.temperature));
-		console.log(this.mesh.material.color);
 	}
 }
 

@@ -19,6 +19,8 @@ class WorldEngine extends Engine {
 	constructor(canvasRef) {
 		super(canvasRef);
 
+		this.started = false;
+
 		this.gui = new GUI();
 		this.guiVarFolder = this.gui.addFolder('Variables');
 
@@ -63,7 +65,12 @@ class WorldEngine extends Engine {
 
 		for(let key in this.starVariables){
 			let varData = this.starVarData[key]
-			let slider = this.guiVarFolder.add(this.starVariables, key, varData.min, varData.max);
+			let slider = this.guiVarFolder.add(this.starVariables, key, varData.min, varData.max)
+				.onChange(() => {
+					if (this.started) {
+						this.fetchPlanetCount();
+					}
+				});
 			slider.setValue(varData.default);
 
 			this.sliders[key] = slider;
@@ -73,6 +80,8 @@ class WorldEngine extends Engine {
 		this.gui.domElement.addEventListener('click', ()=>{
 			this.fetchPlanetCount(); 
 		})
+
+		
 
 		requestPresets()
 			.then((json)=>{
@@ -127,6 +136,7 @@ class WorldEngine extends Engine {
 		this.scene.add(this.light); // change this
 		this.updatePlanets();
 
+		this.started = true;
 		super.start();
 
 	}
