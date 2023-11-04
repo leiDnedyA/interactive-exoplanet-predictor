@@ -1,26 +1,46 @@
 import MeshGameObject from "./MeshGameObject";
 import * as THREE from 'three';
 
+function blendColors(colorA, colorB, amount) {
+	const [rA, gA, bA] = colorA.match(/\w\w/g).map((c) => parseInt(c, 16));
+	const [rB, gB, bB] = colorB.match(/\w\w/g).map((c) => parseInt(c, 16));
+	const r = Math.round(rA + (rB - rA) * amount).toString(16).padStart(2, '0');
+	const g = Math.round(gA + (gB - gA) * amount).toString(16).padStart(2, '0');
+	const b = Math.round(bA + (bB - bA) * amount).toString(16).padStart(2, '0');
+	return '#' + r + g + b;
+}
+
+/*
+ * Calculates the approx. apparent color of a star based on temperature.
+ *
+ * @param {number} temperature - The star's temperature in degrees kelvin
+ * @returns {string} The CSS hex string equivalent of the star's apparent color.
+ * */
 function calculateStarColor(temperature) {
-	if (temperature >= 33000) {
-		return '#9aafff';
+	const minTemps = [
+		[33000, '#9aafff'],
+		[10000, '#ccd7fe'],
+		[7500, '#ffffff'],
+		[6000, '#f9ffd6'],
+		[5200, '#fff2a1'],
+		[3700, '#ffa350'],
+		[0, '#fa6350']
+	]
+	for (const i in minTemps) {
+		if (minTemps[i][0] <= temperature){
+			if (i == minTemps.length - 1){
+				return minTemps[i][1];
+			}
+			const nextColor = minTemps[i-1][1];
+			const prevColor = minTemps[i][1];
+			const nextTemp = minTemps[i-1][0];
+			const prevTemp = minTemps[i][0];
+
+			const mix = (temperature - prevTemp) / (nextTemp - prevTemp);
+
+			return blendColors(minTemps[i][1], minTemps[i - 1][1], mix);
+		}
 	}
-	if (temperature >= 10000) {
-		return '#ccd7fe';
-	}
-	if (temperature >= 7500) {
-		return 'white';
-	}
-	if (temperature >= 6000) {
-		return '#f9ffd6';
-	}
-	if (temperature >= 5200) {
-		return '#fff2a1';
-	}
-	if (temperature >= 3700) {
-		return '#ffa350';
-	}
-	return '#fa6350';
 }
 
 
@@ -48,7 +68,6 @@ class Star extends MeshGameObject{
 	}
 	updateData(newData) {
 		this.data = newData;
-		console.log(calculateStarColor(this.data.temperature));
 		this.mesh.material.color = new THREE.Color(calculateStarColor(this.data.temperature));
 		console.log(this.mesh.material.color);
 	}
