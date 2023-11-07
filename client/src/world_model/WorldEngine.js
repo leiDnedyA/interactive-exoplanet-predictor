@@ -165,7 +165,7 @@ class WorldEngine extends Engine {
 	}
 
 	addPlanet(){
-		let newPlanet = new PlanetOrbit(.5, (this.planetObjects.length + 1) * 10, 0x00ffff);
+		let newPlanet = new PlanetOrbit(.5, (this.planetObjects.length + 1) * 10, 1, 0x00ffff);
 		this.planetObjects.push(newPlanet);
 		this.addGameObject(newPlanet);
 	}
