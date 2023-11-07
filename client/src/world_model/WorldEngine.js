@@ -6,6 +6,15 @@ import Star from "./game_objects/Star";
 import PlanetOrbit from "./game_objects/PlanetOrbit";
 import {requestPrediction, requestPresets} from "../networking/APIRequests";
 
+const sampleDistances = [1, 1.5, 2, 3, 5, 7, 10];
+const sampleRadiuses = [.3, .5, .5, 1, 2, 2.5, 2];
+
+const DEFAULT_STAR_COLOR = 0xffffff;
+const STAR_LIGHT_INTENSITY = 10;
+const STAR_LIGHT_DISTANCE = 0;
+const STAR_LIGHT_DECAY = .2;
+
+
 /**
  * Features of WorldEngine Class
  * contains all features of Engine
@@ -126,7 +135,7 @@ class WorldEngine extends Engine {
 	start() {
 
 		this.star = new Star(new THREE.Vector3(0, 0, 0), this.starVariables);
-		this.light = new THREE.PointLight( 0xffffff, 100, 0, 1.5);
+		this.light = new THREE.PointLight(DEFAULT_STAR_COLOR, STAR_LIGHT_INTENSITY, STAR_LIGHT_DISTANCE, STAR_LIGHT_DECAY);
 		this.addGameObject(this.star);
 		this.camera.position.z = 20;
 		this.camera.position.x = -20;
@@ -165,7 +174,8 @@ class WorldEngine extends Engine {
 	}
 
 	addPlanet(){
-		let newPlanet = new PlanetOrbit(.5, (this.planetObjects.length + 1) * 10, 1, 0x00ffff);
+		const sampleOrbitSpeed = Math.random() * .9 + .1;
+		const newPlanet = new PlanetOrbit(sampleRadiuses[this.planetObjects.length], sampleDistances[this.planetObjects.length] * 10, sampleOrbitSpeed, 0x00ffff);
 		this.planetObjects.push(newPlanet);
 		this.addGameObject(newPlanet);
 	}
