@@ -178,6 +178,8 @@ class WorldEngine extends Engine {
 		const newPlanet = new PlanetOrbit(sampleRadiuses[this.planetObjects.length], sampleDistances[this.planetObjects.length] * 10, sampleOrbitSpeed, 0x00ffff);
 		this.planetObjects.push(newPlanet);
 		this.addGameObject(newPlanet);
+
+		this.outlinePass.selectedObjects = [newPlanet.getPlanetMesh()];
 	}
 
 	removePlanet(){

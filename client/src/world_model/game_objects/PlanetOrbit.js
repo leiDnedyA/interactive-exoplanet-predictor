@@ -19,6 +19,9 @@ class PlanetOrbit extends MeshGameObject{
 		this.mesh.attach(this.planet.mesh);
 		this.started = true;
 	}
+	getPlanetMesh() {
+		return this.planet.getMesh();
+	}
 	update(deltaTime){
 		if (this.started !== true){
 			return;

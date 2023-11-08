@@ -1,5 +1,17 @@
+/*
+ * https://github.com/mrdoob/three.js/blob/master/examples/webgl_postprocessing_outline.html
+ *
+ * See the above link for reference on outline effect rendering.
+ *
+ * */
+
 import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
+import { EffectComposer } from 'three/addons/postprocessing/EffectComposer.js';
+import { OutputPass } from 'three/addons/postprocessing/OutputPass.js';
+import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
+import { OutlinePass } from 'three/addons/postprocessing/OutlinePass.js';
+
 
 
 /**
@@ -18,9 +30,24 @@ class Engine {
 		this.canvas = canvasRef.current;
 		this.scene = new THREE.Scene();
 		this.camera = new THREE.PerspectiveCamera(75, 1, 0.1, 1000);
-		this.renderer = new THREE.WebGLRenderer({ canvas: this.canvas });
-		this.controls = new OrbitControls(this.camera, this.renderer.domElement);
 
+		this.renderer = new THREE.WebGLRenderer({ canvas: this.canvas });
+		this.composer = new EffectComposer(this.renderer);
+
+		this.outlinePass = new OutlinePass( new THREE.Vector2( window.innerWidth, window.innerHeight ), this.scene, this.camera );
+		this.renderPass = new RenderPass( this.scene, this.camera );
+		this.outputPass = new OutputPass();
+
+		this.outlinePass.edgeStrength = 5;
+		this.outlinePass.edgeGlow = 1;
+		this.outlinePass.edgeThickness = 2;
+		this.outlinePass.pulsePeriod = 1;
+
+		this.composer.addPass(this.renderPass);
+		this.composer.addPass(this.outlinePass);
+		this.composer.addPass(this.outputPass);
+
+		this.controls = new OrbitControls(this.camera, this.renderer.domElement);
 
 		this.lastTime = Date.now();
 
@@ -47,6 +74,7 @@ class Engine {
 		requestAnimationFrame(this.update.bind(this));
 		this.controls.update();
 		this.render();
+		this.composer.render();
 	}
 
 	addGameObject(gameObject) {

@@ -14,6 +14,10 @@ class MeshGameObject extends GameObject {
         return dimensions;
     }
 
+    getMesh() {
+	return this.mesh;
+    }
+
     update(deltaTime){
         this.mesh.position.x = this.position.x;
         this.mesh.position.y = this.position.y;
