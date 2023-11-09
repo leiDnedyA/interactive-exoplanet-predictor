@@ -91,8 +91,8 @@ class WorldEngine extends Engine {
 			this.fetchPlanetCount(); 
 		})
 
-		this.inputHandler = new InputHandler(this.scene, this.camera, this.outlinePass);		
-		this.addGameObject(this.inputHandler);
+//		this.inputHandler = new InputHandler(this.scene, this.camera, this.outlinePass);		
+//		this.addGameObject(this.inputHandler);
 
 		requestPresets()
 			.then((json)=>{
@@ -181,7 +181,6 @@ class WorldEngine extends Engine {
 		this.planetObjects.push(newPlanet);
 		this.addGameObject(newPlanet);
 
-//		this.outlinePass.selectedObjects = [newPlanet.getPlanetMesh()];
 	}
 
 	removePlanet(){
