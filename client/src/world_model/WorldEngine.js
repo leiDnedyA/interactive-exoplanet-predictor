@@ -1,4 +1,5 @@
 import Engine from "./Engine";
+import InputHandler from "./InputHandler";
 import BoxObject from "./game_objects/BoxObject";
 import * as THREE from 'three';
 import { GUI } from 'dat.gui/build/dat.gui.js';
@@ -90,7 +91,8 @@ class WorldEngine extends Engine {
 			this.fetchPlanetCount(); 
 		})
 
-		
+		this.inputHandler = new InputHandler(this.scene, this.camera, this.outlinePass);		
+		this.addGameObject(this.inputHandler);
 
 		requestPresets()
 			.then((json)=>{
