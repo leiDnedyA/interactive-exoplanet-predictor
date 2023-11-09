@@ -2,10 +2,10 @@ import * as THREE from 'three';
 import MeshGameObject from './MeshGameObject';
 
 class Planet extends MeshGameObject{
-    constructor(position, color = 0x0000ff, radius = 1){
+    constructor(position, radius = 1, color = 0x0000ff){
         super(position,
             new THREE.SphereGeometry(radius),
-            new THREE.MeshBasicMaterial({color: color}));
+            new THREE.MeshStandardMaterial({color: color}));
     }
 }
 

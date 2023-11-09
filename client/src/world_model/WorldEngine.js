@@ -1,10 +1,20 @@
 import Engine from "./Engine";
+import InputHandler from "./InputHandler";
 import BoxObject from "./game_objects/BoxObject";
 import * as THREE from 'three';
 import { GUI } from 'dat.gui/build/dat.gui.js';
 import Star from "./game_objects/Star";
-import Planet from "./game_objects/Planet";
+import PlanetOrbit from "./game_objects/PlanetOrbit";
 import {requestPrediction, requestPresets} from "../networking/APIRequests";
+
+const sampleDistances = [1, 1.5, 2, 3, 5, 7, 10];
+const sampleRadiuses = [.3, .5, .5, 1, 2, 2.5, 2];
+
+const DEFAULT_STAR_COLOR = 0xffffff;
+const STAR_LIGHT_INTENSITY = 10;
+const STAR_LIGHT_DISTANCE = 0;
+const STAR_LIGHT_DECAY = .2;
+
 
 /**
  * Features of WorldEngine Class
@@ -16,167 +26,171 @@ import {requestPrediction, requestPresets} from "../networking/APIRequests";
  * 
  */
 class WorldEngine extends Engine {
-    constructor(canvasRef) {
-        super(canvasRef);
+	constructor(canvasRef) {
+		super(canvasRef);
 
-        this.gui = new GUI();
-        this.guiVarFolder = this.gui.addFolder('Variables');
-    
-        const inputFields = [
-            { label: 'Temperature (Kelvin)', name: 'temperature', min: 575, max: 29300, def: 5356.3},
-            { label: 'Radius', name: 'radius', min: 0.04, max: 83.8, def: 0.86},
-            { label: 'Stellar Mass', name: 'stellar_mass', min: 0, max: 23.56, def: 0.94},
-            { label: 'Metallicity', name: 'metallicity', min: -1, max: .48, def: 0.14},
-            { label: 'Age', name: 'age', min: 0, max: 14.9, def: 2.8},
-            { label: 'Density', name: 'density', min: 0.00401, max: 276, def: 2.0640},
-            { label: 'Radial Velocity', name: 'radial_velocity', min: -118, max: 244.99, def: 0.64},
-            { label: 'Surface Gravity', name: 'surface_gravity', min: 1.3, max: 5.52, def: 1.3},
-        ]
+		this.started = false;
 
-        this.starVariables = {};
-        this.starVarData = {};
+		this.gui = new GUI();
+		this.guiVarFolder = this.gui.addFolder('Variables');
 
-        this.presets = {};
+		const inputFields = [
+			{ label: 'Temperature (Kelvin)', name: 'temperature', min: 575, max: 29300, def: 5356.3},
+			{ label: 'Radius', name: 'radius', min: 0.04, max: 83.8, def: 0.86},
+			{ label: 'Stellar Mass', name: 'stellar_mass', min: 0, max: 23.56, def: 0.94},
+			{ label: 'Metallicity', name: 'metallicity', min: -1, max: .48, def: 0.14},
+			{ label: 'Age', name: 'age', min: 0, max: 14.9, def: 2.8},
+			{ label: 'Density', name: 'density', min: 0.00401, max: 276, def: 2.0640},
+			{ label: 'Radial Velocity', name: 'radial_velocity', min: -118, max: 244.99, def: 0.64},
+			{ label: 'Surface Gravity', name: 'surface_gravity', min: 1.3, max: 5.52, def: 1.3},
+		]
 
-        this.currentPreset = {
-            'planetCount': null
-        };
+		this.starVariables = {};
+		this.starVarData = {};
 
-        this.planetCount = 2;
-        this.planetObjects = [];
+		this.presets = {};
 
-        for(let i in inputFields){
-            let input = inputFields[i];
+		this.currentPreset = {
+			'planetCount': null
+		};
 
-            this.starVariables[input.name] = (parseFloat(input.min) + 0);
+		this.planetCount = 2;
+		this.planetObjects = [];
 
-            this.starVarData[input.name] = {
-                label: input.label,
-                min: input.min,
-                max: input.max,
-                default: input.def,
-                name: input.name
-            }
-        }
+		for(let i in inputFields){
+			let input = inputFields[i];
 
-        this.sliders = {};
+			this.starVariables[input.name] = (parseFloat(input.min) + 0);
 
-        for(let key in this.starVariables){
-            let varData = this.starVarData[key]
-            let slider = this.guiVarFolder.add(this.starVariables, key, varData.min, varData.max);
-            slider.setValue(varData.default);
-            
-            this.sliders[key] = slider;
-        }
+			this.starVarData[input.name] = {
+				label: input.label,
+				min: input.min,
+				max: input.max,
+				default: input.def,
+				name: input.name
+			}
+		}
 
+		this.sliders = {};
 
-        this.gui.domElement.addEventListener('click', ()=>{
-           this.fetchPlanetCount(); 
-        })
+		for(let key in this.starVariables){
+			let varData = this.starVarData[key]
+			let slider = this.guiVarFolder.add(this.starVariables, key, varData.min, varData.max)
+				.onChange(() => {
+					if (this.started) {
+						this.fetchPlanetCount();
+					}
+				});
+			slider.setValue(varData.default);
 
-        requestPresets()
-            .then((json)=>{
-                this.presets = json;
-
-                let dropdownValues = Object.keys(this.presets).reduce(
-                    (prev, val) => {
-                        prev[`${val} Planet(s)`] = val;
-                        return prev;
-                    }, {}
-                );
-                
-                this.gui.add(this.currentPreset, 'planetCount', dropdownValues)
-                    .onChange(() => {
-                        let preset = this.presets[this.currentPreset.planetCount];
-                        
-                        let keyTranslations = {
-                            st_age: 'age',
-                            st_dens: 'density',
-                            st_met: 'metallicity',
-                            st_logg: 'surface_gravity',
-                            st_mass: 'stellar_mass',
-                            st_rad: 'radius',
-                            st_radv: 'radial_velocity',
-                            st_teff: 'temperature'
-                        }
+			this.sliders[key] = slider;
+		}
 
 
-                        for(let key in preset){
-                            let val = preset[key];
-                            this.starVariables[keyTranslations[key]] = val;
-                            this.sliders[keyTranslations[key]].setValue(val);
-                        }
+		this.gui.domElement.addEventListener('click', ()=>{
+			this.fetchPlanetCount(); 
+		})
 
-                    });
-            });
+//		this.inputHandler = new InputHandler(this.scene, this.camera, this.outlinePass);		
+//		this.addGameObject(this.inputHandler);
 
-        this.fetchPlanetCount();
+		requestPresets()
+			.then((json)=>{
+				this.presets = json;
 
-    }
+				let dropdownValues = Object.keys(this.presets).reduce(
+					(prev, val) => {
+						prev[`${val} Planet(s)`] = val;
+						return prev;
+					}, {}
+				);
 
-    start() {
+				this.gui.add(this.currentPreset, 'planetCount', dropdownValues)
+					.onChange(() => {
+						let preset = this.presets[this.currentPreset.planetCount];
 
-        //// Creating sample scene with rotating cube
-        // const box = new BoxObject(new THREE.Vector3(0, 0, 0,), new THREE.Vector3(10, 10, 10));
-        // this.addGameObject(box);
-        // this.camera.position.z = 20;
+						let keyTranslations = {
+							st_age: 'age',
+							st_dens: 'density',
+							st_met: 'metallicity',
+							st_logg: 'surface_gravity',
+							st_mass: 'stellar_mass',
+							st_rad: 'radius',
+							st_radv: 'radial_velocity',
+							st_teff: 'temperature'
+						}
 
-        // this.camera.lookAt(box.position);
 
-        // this.guiVarFolder.add(box.mesh.rotation, 'x', 0, Math.PI * 2);
+						for(let key in preset){
+							let val = preset[key];
+							this.starVariables[keyTranslations[key]] = val;
+							this.sliders[keyTranslations[key]].setValue(val);
+						}
 
-        // this.addUpdateFunction((deltaTime) => {
-        //     // box.mesh.rotation.x += deltaTime / 1000;
-        // })
+					});
+			});
 
-        this.star = new Star(new THREE.Vector3(0, 0, 0), this.starVariables);
-        this.addGameObject(this.star);
-        this.camera.position.z = 20;
-        this.camera.position.x = 5;
-        this.camera.lookAt(this.star.position);
+		this.fetchPlanetCount();
 
-        this.updatePlanets();
+	}
 
-        super.start();
+	start() {
 
-    }
+		this.star = new Star(new THREE.Vector3(0, 0, 0), this.starVariables);
+		this.light = new THREE.PointLight(DEFAULT_STAR_COLOR, STAR_LIGHT_INTENSITY, STAR_LIGHT_DISTANCE, STAR_LIGHT_DECAY);
+		this.addGameObject(this.star);
+		this.camera.position.z = 20;
+		this.camera.position.x = -20;
+		this.camera.position.y = -20;
+		this.camera.lookAt(this.star.position);
 
-    updatePlanets(){
-        while (this.planetObjects.length != this.planetCount){
-            if(this.planetCount > this.planetObjects.length){
-                this.addPlanet();
-            }else{
-                this.removePlanet();
-            }
-        }
-    }
+		this.scene.add(this.light); // change this
+		this.updatePlanets();
 
-    fetchPlanetCount() {
-        requestPrediction(this.starVariables)
-        .then(json=>{
-            if(json.hasOwnProperty('number of planets')){
-                this.planetCount = parseInt(json['number of planets'])
-                this.updatePlanets();
-            }else{
-                console.log('WARNING: invalid JSON recieved from server...');
-            }
-        });
-    }
+		this.started = true;
+		super.start();
 
-    addPlanet(){
-        let newPlanet = new Planet(new THREE.Vector3(3 * (this.planetObjects.length + 1), 0, 0), 0x00ffff, .25);
-        this.planetObjects.push(newPlanet);
-        this.addGameObject(newPlanet);
-    }
+	}
 
-    removePlanet(){
-        let planet = this.planetObjects.pop();
-        this.removeGameObject(planet.id);
-    }
+	updatePlanets(){
+		while (this.planetObjects.length != this.planetCount){
+			if(this.planetCount > this.planetObjects.length){
+				this.addPlanet();
+			}else{
+				this.removePlanet();
+			}
+		}
+	}
 
-    end(){
-        this.gui.destroy();
-    }
+	fetchPlanetCount() {
+		requestPrediction(this.starVariables)
+			.then(json=>{
+				if(json.hasOwnProperty('number of planets')){
+					this.planetCount = parseInt(json['number of planets'])
+					this.updatePlanets();
+					this.star.updateData(this.starVariables);
+				}else{
+					console.log('WARNING: invalid JSON recieved from server...');
+				}
+			});
+	}
+
+	addPlanet(){
+		const sampleOrbitSpeed = Math.random() * .9 + .1;
+		const newPlanet = new PlanetOrbit(sampleRadiuses[this.planetObjects.length], sampleDistances[this.planetObjects.length] * 10, sampleOrbitSpeed, 0x00ffff);
+		this.planetObjects.push(newPlanet);
+		this.addGameObject(newPlanet);
+
+	}
+
+	removePlanet(){
+		let planet = this.planetObjects.pop();
+		this.removeGameObject(planet.id);
+	}
+
+	end(){
+		this.gui.destroy();
+	}
 
 }
 
