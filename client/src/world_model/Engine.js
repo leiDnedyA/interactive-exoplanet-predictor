@@ -88,6 +88,11 @@ class Engine {
 		if(gameObject.hasOwnProperty('mesh')){
 			this.scene.add(gameObject.mesh);
 		}
+		if (gameObject.hasOwnProperty('childMeshes')) {
+			for (let mesh of gameObject.childMeshes) {
+				this.scene.add(mesh);
+			}
+		}
 
 	}
 
@@ -97,6 +102,12 @@ class Engine {
 
 			if(this.gameObjects[id].hasOwnProperty('mesh')){
 				this.scene.remove(this.gameObjects[id].mesh);
+			}
+
+			if(this.gameObjects[id].hasOwnProperty('childMeshes')) {
+				for (let mesh of this.gameObjects[id].childMeshes) {
+					this.scene.remove(mesh);
+				}
 			}
 
 			delete this.gameObjects[id];

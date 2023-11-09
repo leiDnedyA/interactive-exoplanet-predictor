@@ -179,7 +179,7 @@ class WorldEngine extends Engine {
 		this.planetObjects.push(newPlanet);
 		this.addGameObject(newPlanet);
 
-		this.outlinePass.selectedObjects = [newPlanet.getPlanetMesh()];
+//		this.outlinePass.selectedObjects = [newPlanet.getPlanetMesh()];
 	}
 
 	removePlanet(){

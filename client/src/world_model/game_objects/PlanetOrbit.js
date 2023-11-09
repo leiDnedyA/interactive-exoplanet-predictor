@@ -16,8 +16,9 @@ class PlanetOrbit extends MeshGameObject{
 
 		this.orbitState = 0; // number 0 - 2*pi for where the planet is in its orbit
 
-		this.mesh.attach(this.planet.mesh);
 		this.started = true;
+
+		this.childMeshes = [this.planet.mesh];
 	}
 	getPlanetMesh() {
 		return this.planet.getMesh();
